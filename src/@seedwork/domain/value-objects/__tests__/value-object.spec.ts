@@ -31,4 +31,12 @@ describe('ValueObject Unit Tests', () => {
       expect(`${vo}`).toBe(expected)
     })
   })
+
+  it('should be immutable', () => {
+    const vo = new StubValueObject({ prop1: 'value1' })
+
+    expect(() => {
+      (vo as any).value.prop1 = 'value2'
+    }).toThrow()
+  })
 })
