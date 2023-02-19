@@ -1,5 +1,6 @@
 import Entity from '../../../@seedwork/domain/entity/entity';
 import { UniqueEntityId } from '../../../@seedwork/domain/value-objects/unique-entity-id.vo';
+import ValidatorRules from '../../../@seedwork/validators/validator-rules';
 
 export type CategoryProperties = {
   name: string;
@@ -10,6 +11,8 @@ export type CategoryProperties = {
 
 export class Category extends Entity<CategoryProperties> {
   constructor(public readonly props: CategoryProperties, id?: UniqueEntityId) {
+    Category.validate(props);
+
     super(props, id);
 
     this.description = this.props.description;
@@ -18,8 +21,18 @@ export class Category extends Entity<CategoryProperties> {
   }
 
   update(name: string, description: string) {
+    Category.validate({
+      name,
+      description
+    })
     this.name = name;
     this.description = description;
+  }
+
+  static validate(props: Omit<CategoryProperties, 'created_at'>) {
+    ValidatorRules.values(props.name, 'name').required().string().maxLength(255)
+    ValidatorRules.values(props.description, 'description').string()
+    ValidatorRules.values(props.is_active, 'is_active').boolean()
   }
 
   activate() {
