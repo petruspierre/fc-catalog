@@ -67,7 +67,12 @@ describe("CategoryValidator Tests", () => {
   });
 
   test("valid cases for fields", () => {
-    const arrange = [
+    type Arrange = { 
+      name: string;
+      description?: string | null;
+      is_active?: boolean;
+    }
+    const arrange: Arrange[] = [
       { name: "some value" },
       { name: "some value", description: undefined },
       { name: "some value", description: null },

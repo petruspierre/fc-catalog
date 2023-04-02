@@ -27,7 +27,22 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
     });
     repository.items = [entity];
 
-    let arrange = [
+    type Arrange = {
+      entity: {
+        id: string;
+        name: string;
+        description?: string | null;
+        is_active?: boolean;
+      };
+      expected: {
+        id: string;
+        name: string;
+        description: string | null;
+        is_active: boolean;
+        created_at: Date;
+      };
+    }
+    let arrange: Arrange[] = [
       {
         entity: {
           id: entity.id,

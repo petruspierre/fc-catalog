@@ -53,7 +53,7 @@ describe("Search Unit Tests", () => {
     })
   
     test('sort prop', () => {
-      const defaultValue = null
+      const defaultValue: null = null
       const params = new SearchParams();
       expect(params.sort).toBe(defaultValue);
   
@@ -117,7 +117,7 @@ describe("Search Unit Tests", () => {
     })
   
     test('filter prop', () => {
-      const defaultValue = null
+      const defaultValue: null = null
       const params = new SearchParams();
       expect(params.filter).toBe(defaultValue);
   

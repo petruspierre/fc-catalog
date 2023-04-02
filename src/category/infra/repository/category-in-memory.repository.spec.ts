@@ -11,10 +11,13 @@ describe('CategoryInMemoryRepository Unit Tests', () => {
 
   describe('search category', () => {
     it('should paginate result', async () => {
+      const created_at = new Date();
       repository.items = [new Category({
         name: 'Category 1',
+        created_at,
       }), new Category({
         name: 'Category 2',
+        created_at,
       })];
   
       const result = await repository.search(new SearchParams({
