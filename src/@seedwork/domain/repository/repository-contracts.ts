@@ -1,4 +1,4 @@
-import Entity from "../entity/entity";
+import { Entity } from "../entity/entity";
 import { UniqueEntityId } from "../value-objects/unique-entity-id.vo";
 
 export interface RepositoryInterface<E extends Entity> {

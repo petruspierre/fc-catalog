@@ -1,7 +1,8 @@
-import CategoryRepository from "../../domain/repository/category.repository";
-import { Category } from "../../domain/entities/category";
+import { CategoryRepository } from "#category/domain/repository";
+import { Category } from "#category/domain/entities";
+import { UseCase } from "#seedwork/application/use-case";
+
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
-import { UseCase } from "../../../@seedwork/application/use-case";
 
 export class CreateCategoryUseCase implements UseCase<Input, Output> {
   constructor(private categoryRepo: CategoryRepository.Repository) {}
@@ -18,6 +19,6 @@ export type Input = {
   name: string;
   description?: string;
   is_active?: boolean;
-}
+};
 
 export type Output = CategoryOutput;

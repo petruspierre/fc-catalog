@@ -1,6 +1,6 @@
-import { Category } from "../../../domain/entities/category";
-import CategoryRepository from "../../../domain/repository/category.repository";
-import CategoryInMemoryRepository from "../../../infra/repository/category-in-memory.repository";
+import { Category } from "#category/domain/entities";
+import { CategoryRepository } from "#category/domain/repository";
+import { CategoryInMemoryRepository } from "#category/infra/repository";
 import { ListCategoriesUseCase } from "../list-categories.use-case";
 
 describe("ListCategoriesUseCase Unit Tests", () => {
@@ -81,7 +81,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     });
   });
 
-  it('should return output using pagination, sort and filter', async() => {
+  it("should return output using pagination, sort and filter", async () => {
     const items = [
       new Category({
         name: "a",
@@ -105,15 +105,12 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     let output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: 'name',
-      filter: 'a'
+      sort: "name",
+      filter: "a",
     });
 
     expect(output).toStrictEqual({
-      items: [
-        items[1].toJSON(),
-        items[2].toJSON()
-      ],
+      items: [items[1].toJSON(), items[2].toJSON()],
       total: 3,
       current_page: 1,
       per_page: 2,
@@ -123,14 +120,12 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     output = await useCase.execute({
       page: 2,
       per_page: 2,
-      sort: 'name',
-      filter: 'a'
+      sort: "name",
+      filter: "a",
     });
 
     expect(output).toStrictEqual({
-      items: [
-        items[0].toJSON(),
-      ],
+      items: [items[0].toJSON()],
       total: 3,
       current_page: 2,
       per_page: 2,
@@ -140,20 +135,17 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: 'name',
-      sort_dir: 'desc',
-      filter: 'a'
+      sort: "name",
+      sort_dir: "desc",
+      filter: "a",
     });
 
     expect(output).toStrictEqual({
-      items: [
-        items[0].toJSON(),
-        items[2].toJSON(),
-      ],
+      items: [items[0].toJSON(), items[2].toJSON()],
       total: 3,
       current_page: 1,
       per_page: 2,
       last_page: 2,
     });
-  })
+  });
 });

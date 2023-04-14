@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "imports": {
+    "#seedwork/*": "./dist/@seedwork/*.js",
+    "#category/*": "./dist/category/*.js"
+  },
   "scripts": {
     "ts-node": "ts-node",
     "tsc": "tsc",
     "tsc:check": "npm run tsc -- --noEmit",
     "test": "jest",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "cti": "cti",
+    "cti:@core": "sh ./cti.sh"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +26,7 @@
     "@types/lodash": "^4.14.185",
     "@types/node": "16.11.7",
     "@types/uuid": "^8.3.4",
+    "create-ts-index": "^1.14.0",
     "expect": "^29.5.0",
     "jest": "^29.0.3",
     "ts-node": "^10.9.1",
