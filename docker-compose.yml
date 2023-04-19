@@ -5,3 +5,5 @@ services:
     build: .
     volumes:
       - .:/home/node/api
+    ports:
+      - 3000:3000
