@@ -4,12 +4,12 @@ import { CategoryInMemoryRepository } from "#category/infra";
 import { UpdateCategoryUseCase } from "../update-category.use-case";
 
 describe("UpdateCategoryUseCase Unit Tests", () => {
-  let useCase: UpdateCategoryUseCase;
+  let useCase: UpdateCategoryUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     repository = new CategoryInMemoryRepository();
-    useCase = new UpdateCategoryUseCase(repository);
+    useCase = new UpdateCategoryUseCase.UseCase(repository);
   });
 
   it("should throw error when entity is not found", async () => {
