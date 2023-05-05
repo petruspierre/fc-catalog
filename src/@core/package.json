@@ -49,7 +49,7 @@
     "tsc": "tsc",
     "tsc:check": "npm run tsc -- --noEmit",
     "build": "tsc -b ./tsconfig.json",
-    "build:w": "tsx -b ./tsconfig.json -w",
+    "build:w": "tsc -b ./tsconfig.json -w",
     "test": "jest",
     "test:cov": "jest --coverage",
     "cti": "cti",
