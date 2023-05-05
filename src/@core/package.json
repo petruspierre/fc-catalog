@@ -11,6 +11,8 @@
     "#seedwork/domain/entity": "./dist/@seedwork/domain/entity/index.js",
     "#seedwork/domain/tests": "./dist/@seedwork/domain/tests/index.js",
     "#seedwork/domain/value-objects": "./dist/@seedwork/domain/value-objects/index.js",
+    "#seedwork/domain/repository": "./dist/@seedwork/domain/repository/index.js",
+    "#seedwork/application/dto": "./dist/@seedwork/application/dto/index.js",
     "#seedwork/*": "./dist/@seedwork/*.js",
     "#category/domain": "./dist/category/domain/index.js",
     "#category/domain/entities": "./dist/category/domain/entities/index.js",
