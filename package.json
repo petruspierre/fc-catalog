@@ -10,7 +10,8 @@
   "devDependencies": {},
   "scripts": {
     "prestart:dev": "npm run build -w @pp/core",
-    "start:dev": "npm run build:w -w @pp/core & npm run start:dev -w nestjs"
+    "start:dev": "npm run build:w -w @pp/core & npm run start:dev -w nestjs",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

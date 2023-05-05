@@ -38,9 +38,9 @@ describe('CategoryInMemoryRepository Unit Tests', () => {
 
     it('should filter category by name', async () => {
       repository.items = [new Category({
-        name: 'Category 1',
+        name: 'Category A',
       }), new Category({
-        name: 'Category 2',
+        name: 'Category B',
       })];
   
       const result = await repository.search(new SearchParams({
