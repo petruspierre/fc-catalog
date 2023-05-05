@@ -5,8 +5,17 @@
   "main": "index.js",
   "imports": {
     "#seedwork/domain": "./dist/@seedwork/domain/index.js",
+    "#seedwork/domain/validators": "./dist/@seedwork/domain/validators/index.js",
+    "#seedwork/domain/errors": "./dist/@seedwork/domain/errors/index.js",
+    "#seedwork/domain/utils": "./dist/@seedwork/domain/utils/index.js",
+    "#seedwork/domain/entity": "./dist/@seedwork/domain/entity/index.js",
+    "#seedwork/domain/tests": "./dist/@seedwork/domain/tests/index.js",
+    "#seedwork/domain/value-objects": "./dist/@seedwork/domain/value-objects/index.js",
     "#seedwork/*": "./dist/@seedwork/*.js",
     "#category/domain": "./dist/category/domain/index.js",
+    "#category/domain/entities": "./dist/category/domain/entities/index.js",
+    "#category/domain/repository": "./dist/category/domain/repository/index.js",
+    "#category/domain/validators": "./dist/category/domain/validators/index.js",
     "#category/*": "./dist/category/*.js"
   },
   "exports": {
