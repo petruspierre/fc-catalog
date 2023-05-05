@@ -1,9 +1,9 @@
-import { Category } from "#category/domain/entities";
-import { NotFoundError } from "#seedwork/domain/errors";
-import { CategoryInMemoryRepository } from "#category/infra";
-import { UpdateCategoryUseCase } from "../update-category.use-case";
+import { Category } from '#category/domain/entities';
+import { NotFoundError } from '#seedwork/domain/errors';
+import { CategoryInMemoryRepository } from '#category/infra';
+import { UpdateCategoryUseCase } from '../update-category.use-case';
 
-describe("UpdateCategoryUseCase Unit Tests", () => {
+describe('UpdateCategoryUseCase Unit Tests', () => {
   let useCase: UpdateCategoryUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
@@ -12,18 +12,18 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
     useCase = new UpdateCategoryUseCase.UseCase(repository);
   });
 
-  it("should throw error when entity is not found", async () => {
+  it('should throw error when entity is not found', async () => {
     await expect(() =>
-      useCase.execute({ id: "fake-id", name: "fake" })
+      useCase.execute({ id: 'fake-id', name: 'fake' }),
     ).rejects.toThrowError(
-      new NotFoundError(`Entity not found using ID fake-id`)
+      new NotFoundError(`Entity not found using ID fake-id`),
     );
   });
 
-  it("should update a category", async () => {
-    const spyUpdate = jest.spyOn(repository, "update");
+  it('should update a category', async () => {
+    const spyUpdate = jest.spyOn(repository, 'update');
     const entity = new Category({
-      name: "Category 1",
+      name: 'Category 1',
     });
     repository.items = [entity];
 
@@ -41,16 +41,16 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
         is_active: boolean;
         created_at: Date;
       };
-    }
-    let arrange: Arrange[] = [
+    };
+    const arrange: Arrange[] = [
       {
         entity: {
           id: entity.id,
-          name: "Category 2",
+          name: 'Category 2',
         },
         expected: {
           id: entity.id,
-          name: "Category 2",
+          name: 'Category 2',
           description: null,
           is_active: true,
           created_at: entity.created_at,
@@ -59,14 +59,14 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
       {
         entity: {
           id: entity.id,
-          name: "Category 2",
-          description: "Description",
+          name: 'Category 2',
+          description: 'Description',
           is_active: false,
         },
         expected: {
           id: entity.id,
-          name: "Category 2",
-          description: "Description",
+          name: 'Category 2',
+          description: 'Description',
           is_active: false,
           created_at: entity.created_at,
         },
@@ -74,11 +74,11 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
       {
         entity: {
           id: entity.id,
-          name: "Category 2",
+          name: 'Category 2',
         },
         expected: {
           id: entity.id,
-          name: "Category 2",
+          name: 'Category 2',
           description: null,
           is_active: false,
           created_at: entity.created_at,
@@ -87,12 +87,12 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
       {
         entity: {
           id: entity.id,
-          name: "Category 2",
+          name: 'Category 2',
           is_active: true,
         },
         expected: {
           id: entity.id,
-          name: "Category 2",
+          name: 'Category 2',
           description: null,
           is_active: true,
           created_at: entity.created_at,
@@ -101,20 +101,20 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
       {
         entity: {
           id: entity.id,
-          name: "Category 1",
+          name: 'Category 1',
           description: 'Description 2',
         },
         expected: {
           id: entity.id,
-          name: "Category 1",
+          name: 'Category 1',
           description: 'Description 2',
           is_active: true,
           created_at: entity.created_at,
         },
       },
     ];
-    
-    for(const item of arrange) {
+
+    for (const item of arrange) {
       const result = await useCase.execute(item.entity);
       expect(result).toStrictEqual(item.expected);
     }

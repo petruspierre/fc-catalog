@@ -1,5 +1,5 @@
-import { Entity } from "../entity/entity";
-import { UniqueEntityId } from "../value-objects/unique-entity-id.vo";
+import { Entity } from '../entity/entity';
+import { UniqueEntityId } from '../value-objects/unique-entity-id.vo';
 
 export interface RepositoryInterface<E extends Entity> {
   insert(entity: E): Promise<void>;
@@ -9,7 +9,7 @@ export interface RepositoryInterface<E extends Entity> {
   delete(id: string | UniqueEntityId): Promise<void>;
 }
 
-export type SortDirection = "asc" | "desc";
+export type SortDirection = 'asc' | 'desc';
 
 export type SearchProps<Filter = string> = {
   page?: number;
@@ -21,7 +21,7 @@ export type SearchProps<Filter = string> = {
 
 export class SearchParams<Filter = string> {
   protected _page: number;
-  protected _per_page: number = 15;
+  protected _per_page = 15;
   protected _sort: string | null;
   protected _sort_dir: SortDirection | null;
   protected _filter: Filter | null;
@@ -53,7 +53,7 @@ export class SearchParams<Filter = string> {
   }
 
   private set per_page(value: number) {
-    let _per_page = value as any === true ? this._per_page : +value;
+    let _per_page = (value as any) === true ? this._per_page : +value;
 
     if (
       Number.isNaN(_per_page) ||
@@ -72,7 +72,7 @@ export class SearchParams<Filter = string> {
 
   private set sort(value: string | null) {
     this._sort =
-      value === null || value === undefined || value === "" ? null : `${value}`;
+      value === null || value === undefined || value === '' ? null : `${value}`;
   }
 
   get sort_dir(): SortDirection | null {
@@ -80,13 +80,13 @@ export class SearchParams<Filter = string> {
   }
 
   private set sort_dir(value: string | null) {
-    if(!this.sort) {
+    if (!this.sort) {
       this._sort_dir = null;
       return;
     }
 
     const dir = `${value}`.toLowerCase();
-    this._sort_dir = dir !== "asc" && dir !== "desc" ? "asc" : dir;
+    this._sort_dir = dir !== 'asc' && dir !== 'desc' ? 'asc' : dir;
   }
 
   get filter(): Filter | null {
@@ -95,7 +95,9 @@ export class SearchParams<Filter = string> {
 
   private set filter(value: Filter | null) {
     this._filter =
-      value === null || value === undefined || (value as unknown) === "" ? null : `${value}` as any;
+      value === null || value === undefined || (value as unknown) === ''
+        ? null
+        : (`${value}` as any);
   }
 }
 
@@ -107,7 +109,7 @@ type SearchResultProps<E extends Entity, Filter> = {
   sort: string | null;
   sort_dir: string | null;
   filter: Filter | null;
-}
+};
 
 export class SearchResult<E extends Entity = Entity, Filter = string> {
   readonly items: E[];
@@ -122,7 +124,7 @@ export class SearchResult<E extends Entity = Entity, Filter = string> {
   constructor(props: SearchResultProps<E, Filter>) {
     this.items = props.items;
     this.total = props.total;
-    this.current_page = props.current_page
+    this.current_page = props.current_page;
     this.per_page = props.per_page;
     this.last_page = Math.ceil(this.total / this.per_page);
     this.sort = props.sort;
@@ -140,7 +142,7 @@ export class SearchResult<E extends Entity = Entity, Filter = string> {
       sort: this.sort,
       sort_dir: this.sort_dir,
       filter: this.filter,
-    }
+    };
   }
 }
 
@@ -148,7 +150,7 @@ export interface SearchableRepositoryInterface<
   E extends Entity,
   Filter = string,
   SearchInput = SearchParams<Filter>,
-  SearchOutput = SearchResult<E, Filter>
+  SearchOutput = SearchResult<E, Filter>,
 > extends RepositoryInterface<E> {
   sortableFields: string[];
   search(props: SearchInput): Promise<SearchOutput>;

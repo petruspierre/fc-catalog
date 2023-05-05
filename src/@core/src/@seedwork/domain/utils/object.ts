@@ -6,10 +6,10 @@ export function deepFreeze<T>(obj: T) {
   for (const name of propNames) {
     const value = obj[name as keyof T];
 
-    if(value && typeof value === "object") {
+    if (value && typeof value === 'object') {
       deepFreeze(value);
     }
   }
 
-  return Object.freeze(obj)
+  return Object.freeze(obj);
 }

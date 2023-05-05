@@ -1,9 +1,9 @@
-import { Category } from "#category/domain/entities";
-import { CategoryRepository } from "#category/domain/repository";
-import { CategoryInMemoryRepository } from "#category/infra/repository";
-import { ListCategoriesUseCase } from "../list-categories.use-case";
+import { Category } from '#category/domain/entities';
+import { CategoryRepository } from '#category/domain/repository';
+import { CategoryInMemoryRepository } from '#category/infra/repository';
+import { ListCategoriesUseCase } from '../list-categories.use-case';
 
-describe("ListCategoriesUseCase Unit Tests", () => {
+describe('ListCategoriesUseCase Unit Tests', () => {
   let useCase: ListCategoriesUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
@@ -12,7 +12,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     useCase = new ListCategoriesUseCase.UseCase(repository);
   });
 
-  test("toOutput method", () => {
+  test('toOutput method', () => {
     let result = new CategoryRepository.SearchResult({
       items: [],
       total: 1,
@@ -22,7 +22,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       sort_dir: null,
       filter: null,
     });
-    let output = useCase["toOutput"](result);
+    let output = useCase['toOutput'](result);
 
     expect(output).toStrictEqual({
       items: [],
@@ -33,7 +33,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     });
 
     const entity = new Category({
-      name: "Movie",
+      name: 'Movie',
     });
 
     result = new CategoryRepository.SearchResult({
@@ -45,7 +45,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       sort_dir: null,
       filter: null,
     });
-    output = useCase["toOutput"](result);
+    output = useCase['toOutput'](result);
 
     expect(output).toStrictEqual({
       items: [entity.toJSON()],
@@ -56,15 +56,15 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     });
   });
 
-  it("should return output when using empty input with categories ordered by created_at", async () => {
+  it('should return output when using empty input with categories ordered by created_at', async () => {
     const items = [
       new Category({
-        name: "Category 1",
-        created_at: new Date("2021-01-01"),
+        name: 'Category 1',
+        created_at: new Date('2021-01-01'),
       }),
       new Category({
-        name: "Category 2",
-        created_at: new Date("2022-01-01"),
+        name: 'Category 2',
+        created_at: new Date('2022-01-01'),
       }),
     ];
 
@@ -81,22 +81,22 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     });
   });
 
-  it("should return output using pagination, sort and filter", async () => {
+  it('should return output using pagination, sort and filter', async () => {
     const items = [
       new Category({
-        name: "a",
+        name: 'a',
       }),
       new Category({
-        name: "AAA",
+        name: 'AAA',
       }),
       new Category({
-        name: "AaA",
+        name: 'AaA',
       }),
       new Category({
-        name: "b",
+        name: 'b',
       }),
       new Category({
-        name: "c",
+        name: 'c',
       }),
     ];
 
@@ -105,8 +105,8 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     let output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
 
     expect(output).toStrictEqual({
@@ -120,8 +120,8 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     output = await useCase.execute({
       page: 2,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
 
     expect(output).toStrictEqual({
@@ -135,9 +135,9 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      sort_dir: "desc",
-      filter: "a",
+      sort: 'name',
+      sort_dir: 'desc',
+      filter: 'a',
     });
 
     expect(output).toStrictEqual({

@@ -1,4 +1,4 @@
-import { SearchResult } from "../../domain/repository/repository-contracts";
+import { SearchResult } from '../../domain/repository/repository-contracts';
 
 export type PaginationOutputDto<Items = any> = {
   items: Items[];
@@ -6,7 +6,7 @@ export type PaginationOutputDto<Items = any> = {
   current_page: number;
   last_page: number;
   per_page: number;
-}
+};
 
 export class PaginationOutputMapper {
   static toOutput(result: SearchResult): Omit<PaginationOutputDto, 'items'> {
@@ -15,6 +15,6 @@ export class PaginationOutputMapper {
       last_page: result.last_page,
       per_page: result.per_page,
       total: result.total,
-    }
+    };
   }
 }

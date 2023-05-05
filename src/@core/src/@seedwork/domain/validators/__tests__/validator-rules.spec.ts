@@ -1,5 +1,5 @@
-import { ValidationError } from "../../../domain/errors/validation.error";
-import ValidatorRules from "../validator-rules";
+import { ValidationError } from '../../../domain/errors/validation.error';
+import ValidatorRules from '../validator-rules';
 
 type Values = {
   value: any;
@@ -31,37 +31,36 @@ function runRule({
   property,
   rule,
   params = [],
-}: Omit<ExpectedRule, "error">) {
+}: Omit<ExpectedRule, 'error'>) {
   const validator = ValidatorRules.values(value, property);
   const method = validator[rule];
-  // @ts-ignore
   method.apply(validator, params);
 }
 
-describe("ValidatorRules Unit Tests", () => {
-  test("values method", () => {
-    const validator = ValidatorRules.values("value", "property");
+describe('ValidatorRules Unit Tests', () => {
+  test('values method', () => {
+    const validator = ValidatorRules.values('value', 'property');
 
     expect(validator).toBeInstanceOf(ValidatorRules);
-    expect(validator["value"]).toBe("value");
-    expect(validator["property"]).toBe("property");
+    expect(validator['value']).toBe('value');
+    expect(validator['property']).toBe('property');
   });
 
-  test("required validation rule", () => {
-    const property = "property";
-    const rule = "required";
+  test('required validation rule', () => {
+    const property = 'property';
+    const rule = 'required';
     const error = new ValidationError(`${property} is required.`);
 
     const validCases: Values[] = [
-      { value: "value" },
+      { value: 'value' },
       { value: 0 },
       { value: false },
       { value: 5 },
-      { value: { prop1: "value1" } },
+      { value: { prop1: 'value1' } },
     ];
 
     const invalidCases: Values[] = [
-      { value: "" },
+      { value: '' },
       { value: null },
       { value: undefined },
     ];
@@ -85,14 +84,14 @@ describe("ValidatorRules Unit Tests", () => {
     });
   });
 
-  test("string validation rule", () => {
-    const property = "property";
-    const rule = "string";
+  test('string validation rule', () => {
+    const property = 'property';
+    const rule = 'string';
     const error = new ValidationError(`${property} must be a string.`);
 
     const validCases: Values[] = [
-      { value: "value" },
-      { value: "" },
+      { value: 'value' },
+      { value: '' },
       { value: null },
       { value: undefined },
     ];
@@ -122,9 +121,9 @@ describe("ValidatorRules Unit Tests", () => {
     });
   });
 
-  test("boolean validation rule", () => {
-    const property = "property";
-    const rule = "boolean";
+  test('boolean validation rule', () => {
+    const property = 'property';
+    const rule = 'boolean';
     const error = new ValidationError(`${property} must be a boolean.`);
 
     const validCases: Values[] = [
@@ -137,7 +136,7 @@ describe("ValidatorRules Unit Tests", () => {
     const invalidCases: Values[] = [
       { value: 5 },
       { value: {} },
-      { value: "false" },
+      { value: 'false' },
     ];
 
     validCases.forEach((validCase) => {
@@ -159,22 +158,22 @@ describe("ValidatorRules Unit Tests", () => {
     });
   });
 
-  test("maxLength validation rule", () => {
-    const property = "property";
+  test('maxLength validation rule', () => {
+    const property = 'property';
     const max = 5;
-    const rule = "maxLength";
+    const rule = 'maxLength';
     const error = new ValidationError(
-      `${property} must be less or equal than ${max} characters.`
+      `${property} must be less or equal than ${max} characters.`,
     );
 
     const validCases: Values[] = [
-      { value: "12345" },
-      { value: "" },
+      { value: '12345' },
+      { value: '' },
       { value: null },
       { value: undefined },
     ];
 
-    const invalidCases: Values[] = [{ value: "123456" }];
+    const invalidCases: Values[] = [{ value: '123456' }];
 
     validCases.forEach((validCase) => {
       assertValid({
@@ -197,28 +196,28 @@ describe("ValidatorRules Unit Tests", () => {
     });
   });
 
-  it("should throw a validation error when combining two or more rules", () => {
-    let validator = ValidatorRules.values(null, "field");
+  it('should throw a validation error when combining two or more rules', () => {
+    let validator = ValidatorRules.values(null, 'field');
 
     expect(() => {
       validator.required().string();
-    }).toThrow(new ValidationError("field is required."));
+    }).toThrow(new ValidationError('field is required.'));
 
-    validator = ValidatorRules.values(5, "field");
+    validator = ValidatorRules.values(5, 'field');
     expect(() => {
       validator.required().string().maxLength(5);
-    }).toThrow(new ValidationError("field must be a string."));
+    }).toThrow(new ValidationError('field must be a string.'));
 
-    validator = ValidatorRules.values("123456", "field");
+    validator = ValidatorRules.values('123456', 'field');
     expect(() => {
       validator.required().string().maxLength(5);
     }).toThrow(
-      new ValidationError("field must be less or equal than 5 characters.")
+      new ValidationError('field must be less or equal than 5 characters.'),
     );
 
-    validator = ValidatorRules.values(null, "field");
+    validator = ValidatorRules.values(null, 'field');
     expect(() => {
       validator.required().boolean();
-    }).toThrow(new ValidationError("field is required."));
+    }).toThrow(new ValidationError('field is required.'));
   });
 });

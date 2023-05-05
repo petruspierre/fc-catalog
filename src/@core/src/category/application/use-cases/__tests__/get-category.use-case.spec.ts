@@ -1,9 +1,9 @@
-import { Category } from "#category/domain/entities";
-import { NotFoundError } from "#seedwork/domain/errors";
-import {CategoryInMemoryRepository} from "#category/infra/repository";
-import { GetCategoryUseCase } from "../get-category.use-case";
+import { Category } from '#category/domain/entities';
+import { NotFoundError } from '#seedwork/domain/errors';
+import { CategoryInMemoryRepository } from '#category/infra/repository';
+import { GetCategoryUseCase } from '../get-category.use-case';
 
-describe("GetCategoryUseCase Unit Tests", () => {
+describe('GetCategoryUseCase Unit Tests', () => {
   let useCase: GetCategoryUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
@@ -12,9 +12,9 @@ describe("GetCategoryUseCase Unit Tests", () => {
     useCase = new GetCategoryUseCase.UseCase(repository);
   });
 
-  it("should throw error when entity is not found", async () => {
-    await expect(() => useCase.execute({ id: "fake-id" })).rejects.toThrowError(
-      new NotFoundError(`Entity not found using ID fake-id`)
+  it('should throw error when entity is not found', async () => {
+    await expect(() => useCase.execute({ id: 'fake-id' })).rejects.toThrowError(
+      new NotFoundError(`Entity not found using ID fake-id`),
     );
   });
 
@@ -23,8 +23,8 @@ describe("GetCategoryUseCase Unit Tests", () => {
     const items = [
       new Category({
         name: 'Category 1',
-      })
-    ]
+      }),
+    ];
     repository.items = items;
 
     const output = await useCase.execute({ id: items[0].id });
@@ -34,8 +34,8 @@ describe("GetCategoryUseCase Unit Tests", () => {
       name: 'Category 1',
       description: null,
       is_active: true,
-      created_at: items[0].created_at
-    })
+      created_at: items[0].created_at,
+    });
     expect(spyFindById).toBeCalledTimes(1);
-  })
+  });
 });
