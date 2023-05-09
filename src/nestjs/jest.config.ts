@@ -1,7 +1,7 @@
 export default {
   displayName: {
     name: 'nestjs',
-    color: 'magentaBright'
+    color: 'magentaBright',
   },
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: 'src',
@@ -14,5 +14,5 @@ export default {
   testEnvironment: 'node',
   moduleNameMapper: {
     '@pp/core/(.*)': '<rootDir>/../../../node_modules/@pp/core/dist/$1',
-  }
+  },
 };
